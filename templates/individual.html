@@ -1,0 +1,25 @@
+{% extends "layout.html" %} {% block body %}
+<h1>{{ individual.nameString }}, {{ individual.sexString }}</h1>
+<p><span class="label">Born</span> {{ individual.bornString }}</p>
+<p><span class="label">Died</span> {{ individual.diedString }}</p>
+{% if individual.families %} {% for family in individual.families %} {% if family.partnerIndividual %}
+<p><span class="label">Partner</span>
+  <a href="/?i_id={{ family.partnerIndividual.individualIdString }}">{{ family.partnerIndividual.nameString }}</a>
+</p>
+{% endif %} {% if family.childIndividuals %}
+<p><span class="label">Children</span></p>
+<ul>
+  {% for child in family.childIndividuals %}
+  <li>
+    <a href="/?i_id={{ child.individualIdString }}">{{ child.nameString }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %} {% endfor %} {% endif %} {% if individual.motherIndividual or individual.fatherIndividual %}
+<p><span class="label">Mother</span>
+  <a href="/?i_id={{ individual.motherIndividual.individualIdString }}">{{ individual.motherIndividual.nameString }}</a>
+</p>
+<p><span class="label">Father</span>
+  <a href="/?i_id={{ individual.fatherIndividual.individualIdString }}">{{ individual.fatherIndividual.nameString }}</a>
+</p>
+{% endif %} {% endblock %}

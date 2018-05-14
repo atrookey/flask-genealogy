@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export APPLICATION_SETTINGS=./.settings.cfg
+flask run
